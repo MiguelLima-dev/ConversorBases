@@ -23,7 +23,7 @@ int main(){
 		decimal /= 2;
 	}
 	
-	cout << "Decimal: " << binario << endl;
+	cout << "Binario: " << binario << endl;
 
     // Converte decimal para hexadecimal
     decimal = temp;
