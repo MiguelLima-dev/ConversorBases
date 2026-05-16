@@ -15,6 +15,30 @@ string deci_bin(int decimal) {
 	return binario;
 }
 
+// DECIMAL FRACIONARIO P/ BINÁRIO.
+string deciFrac_bin(double decimal) {
+	string binario = "";
+	int parte_inteira = decimal;
+	double parte_fracionaria = decimal - parte_inteira;
+
+	if (parte_inteira == 0) binario = "0";
+	while (parte_inteira != 0) {
+		binario = char((parte_inteira % 2) + '0') + binario;
+		parte_inteira /= 2;
+	}
+
+	if (parte_fracionaria != 0) {
+		binario = binario + '.';
+
+		while (parte_fracionaria != 0) {
+			parte_fracionaria *= 2;
+			binario = binario + char((int) parte_fracionaria + '0');
+			parte_fracionaria = parte_fracionaria - (int) parte_fracionaria;
+		}
+	}
+
+	return binario;
+}
 // BINÁRIO P/ DECIMAL.
 int bin_deci(string binario) {
     int decimal = 0, peso = 1;
@@ -42,6 +66,31 @@ string deci_oct(int decimal) {
 	return octal;
 }
 
+// DECIMAL FRACIONÁRIO P/ OCTAL.
+string deciFrac_oct(double decimal) {
+	string octal = "";
+	int parte_inteira = decimal;
+	double parte_fracionaria = decimal - parte_inteira;
+
+	if (parte_inteira == 0) octal = "0";
+	while (parte_inteira != 0) {
+		octal = char((parte_inteira % 8) + '0') + octal;
+		parte_inteira /= 8;
+	}
+
+	if (parte_fracionaria != 0) {
+		octal = octal + '.';
+
+		while (parte_fracionaria != 0) {
+			parte_fracionaria *= 8;
+			octal = octal + char((int) parte_fracionaria + '0');
+			parte_fracionaria = parte_fracionaria - (int) parte_fracionaria;
+		}
+	}
+
+	return octal;
+}
+
 // OCTAL P/ DECIMAL.
 int oct_deci(string octal) {
     int decimal = 0, peso = 1;
@@ -61,10 +110,36 @@ string deci_hexa(int decimal) {
 	string digitos = "0123456789ABCDEF";
 
 	if (decimal == 0) hexadecimal = "0";
-	
+
 	while (decimal != 0) {
 		hexadecimal = digitos[decimal % 16] + hexadecimal;
 		decimal /= 16;		
+	}
+
+	return hexadecimal;
+}
+
+// DECIMAL FRACIONÁRIO P/ HEXADECIMAL.
+string deciFrac_hexa(double decimal) {
+	string hexadecimal = "";
+	int parte_inteira = decimal;
+	double parte_fracionaria = decimal - parte_inteira;
+
+	string digitos = "0123456789ABCDEF";
+	if (parte_inteira == 0) hexadecimal = "0";
+	while (parte_inteira != 0) {
+		hexadecimal = digitos[parte_inteira % 16] + hexadecimal;
+		parte_inteira /= 16;
+	}
+
+	if (parte_fracionaria != 0) {
+		hexadecimal = hexadecimal + '.';
+
+		while (parte_fracionaria != 0) {
+			parte_fracionaria *= 16;
+			hexadecimal = hexadecimal + char((int) parte_fracionaria + '0');
+			parte_fracionaria = parte_fracionaria - (int) parte_fracionaria;
+		}
 	}
 
 	return hexadecimal;
