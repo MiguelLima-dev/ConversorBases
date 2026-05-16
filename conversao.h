@@ -4,6 +4,8 @@ using namespace std;
 // DECIMAL P/ BINÁRIO.
 string deci_bin(int decimal) {
 	string binario = "";
+	
+	if (decimal == 0) binario = "0";
 
 	while (decimal != 0) {
 		binario = char((decimal % 2) + '0') + binario;
@@ -30,6 +32,8 @@ int bin_deci(string binario) {
 string deci_oct(int decimal) {
 	string octal = "";
 
+	if (decimal == 0) octal = "0";
+
 	while (decimal != 0) {
 		octal = char((decimal % 8) + '0') + octal;
 		decimal /= 8;
@@ -51,11 +55,13 @@ int oct_deci(string octal) {
     return decimal;
 }
 
-// DECIMAL P/ HEXADECIMAL
+// DECIMAL P/ HEXADECIMAL.
 string deci_hexa(int decimal) {
 	string hexadecimal = "";
 	string digitos = "0123456789ABCDEF";
 
+	if (decimal == 0) hexadecimal = "0";
+	
 	while (decimal != 0) {
 		hexadecimal = digitos[decimal % 16] + hexadecimal;
 		decimal /= 16;		
@@ -63,3 +69,31 @@ string deci_hexa(int decimal) {
 
 	return hexadecimal;
 }
+
+// Usada para encontrar o valor de cada digitos da
+// base Hexadecimal.
+int index(char c) {
+	int indice = -1;
+	string digitos = "0123456789ABCDEF";
+	for (int i = 0; i < 16 && indice == -1; i++) {
+		if (digitos[i] == c) {
+			indice = i;
+		}
+	}
+
+	return indice;
+}
+
+// HEXADECIMAL P/ DECIMAL.
+int hexa_deci(string hexadecimal) {
+	int decimal = 0, peso = 1;
+	unsigned int n_digitos = hexadecimal.length();
+
+	for (int i = n_digitos - 1; i >= 0; i--) {
+		decimal += index(hexadecimal[i]) * peso;
+		peso *= 16;
+	}
+
+	return decimal;
+}
+
