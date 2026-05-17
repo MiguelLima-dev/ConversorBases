@@ -22,6 +22,7 @@ string deciFrac_bin(double decimal) {
 	double parte_fracionaria = decimal - parte_inteira;
 
 	if (parte_inteira == 0) binario = "0";
+
 	while (parte_inteira != 0) {
 		binario = char((parte_inteira % 2) + '0') + binario;
 		parte_inteira /= 2;
@@ -30,15 +31,22 @@ string deciFrac_bin(double decimal) {
 	if (parte_fracionaria != 0) {
 		binario = binario + '.';
 
-		while (parte_fracionaria != 0) {
+		int casas = 16;
+
+		while (parte_fracionaria != 0 && casas-- > 0) {
 			parte_fracionaria *= 2;
 			binario = binario + char((int) parte_fracionaria + '0');
 			parte_fracionaria = parte_fracionaria - (int) parte_fracionaria;
+		}
+		
+		if (casas == 0 && parte_fracionaria != 0) {
+			binario = binario + "...";
 		}
 	}
 
 	return binario;
 }
+
 // BINÁRIO P/ DECIMAL.
 int bin_deci(string binario) {
     int decimal = 0, peso = 1;
@@ -137,7 +145,7 @@ string deciFrac_hexa(double decimal) {
 
 		while (parte_fracionaria != 0) {
 			parte_fracionaria *= 16;
-			hexadecimal = hexadecimal + char((int) parte_fracionaria + '0');
+			hexadecimal = hexadecimal + digitos[(int) parte_fracionaria];
 			parte_fracionaria = parte_fracionaria - (int) parte_fracionaria;
 		}
 	}
