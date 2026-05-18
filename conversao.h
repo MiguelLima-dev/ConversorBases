@@ -16,6 +16,7 @@ string deci_bin(int decimal) {
 }
 
 // DECIMAL FRACIONARIO P/ BINÁRIO.
+// Precisa aceitar vígula, meu deus.
 string deciFrac_bin(double decimal) {
 	string binario = "";
 	int parte_inteira = decimal;
