@@ -28,18 +28,18 @@ string deciFrac_bin(double decimal) {
 		parte_inteira /= 2;
 	}
 
-	if (parte_fracionaria != 0) {
+	if (parte_fracionaria > 1e-12) {
 		binario = binario + '.';
 
 		int casas = 16;
 
-		while (parte_fracionaria != 0 && casas-- > 0) {
+		while (parte_fracionaria > 1e-12 && casas-- > 0) {
 			parte_fracionaria *= 2;
 			binario = binario + char((int) parte_fracionaria + '0');
 			parte_fracionaria = parte_fracionaria - (int) parte_fracionaria;
 		}
 		
-		if (casas == 0 && parte_fracionaria != 0) {
+		if (casas <= 0 && parte_fracionaria > 1e-12) {
 			binario = binario + "...";
 		}
 	}
