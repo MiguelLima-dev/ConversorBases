@@ -27,27 +27,42 @@ double stringDouble(string s) {
 	return resultado;
 }
 
-// RETRONA SE O NÚMERO É VALIDO PARA A BASE INFORMADA.
-bool valida(string numero, int base){
+// RETORNA SE O NÚMERO É VALIDO PARA A BASE INFORMADA.
+bool valida(string &numero, int base){
+    if (numero == "") {
+        cout << "Nenhuma entrada encontrada!" << endl;
+        return false;
+    }
 	string validos = "0123456789ABCDEF";
-	bool valido = true;
-	for (int i = 0; numero[i] != '\0' && valido; i++) {
+    int separador = 0;
+	for (int i = 0; numero[i] != '\0'; i++) {
 		char c = numero[i];
-		if (c >= 'a' && c <= 'z') c = c - 'a' + 'A';
+		if (c >= 'a' && c <= 'z') {
+            c = c - 'a' + 'A';
+            numero[i] = c;
+        }
 
-		if (c != '.' && c != ',') {
+        if (c == '.' || c == ',') separador++;
+		else {
 			int indx = -1;
 			for (int j = 0; j < 16; j++) {
 				if (validos[j] == c) indx = j;
 			}
-
-			if (indx == -1 || indx >= base) valido = false;
+			if (indx == -1 || indx >= base) {
+                cout << "Dígito '" << c << "' inválido para base " << base <<"!" << endl;
+                return false;
+            }
 		}
+        if (separador > 1) {
+            cout << "Mais de um separador inserido!" << endl;
+            return false;
+        }
 	}
 
-	return valido;
+	return true;
 }
 
+// FUNÇÃO AUXILIAR PARA CONVERSÃO DE OUTRAS BASES PARA DECIMAL.
 void separa(string numero, string &inteira, string &fracionaria) {
 	inteira = "";
 	fracionaria = "";

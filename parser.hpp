@@ -4,7 +4,7 @@
 #include <string>
 
 double stringDouble(std::string s);
-bool valida(std::string numero, int base);
+bool valida(std::string &numero, int base);
 void separa(std::string numero, std::string &inteira, std::string &fracionaria);
 
 #endif

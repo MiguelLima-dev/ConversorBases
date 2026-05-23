@@ -24,7 +24,6 @@ int main(){
                 cout << "Binário: " <<
                 deci_bin(stringDouble(entrada)) << endl;
             }
-            else cout << "Entrada invalida!" << endl;
             break;
 
         case 2:
@@ -34,7 +33,6 @@ int main(){
                 cout << "Octal: " <<
                 deci_oct(stringDouble(entrada)) << endl;
             }
-            else cout << "Entrada invalida!" << endl;
             break;
         
         case 3:
@@ -44,7 +42,6 @@ int main(){
                 cout << "Hexadecimal: " <<
                 deci_hexa(stringDouble(entrada)) << endl;
             }
-            else cout << "Entrada invalida!" << endl;
             break;
         
         case 4:
@@ -60,7 +57,6 @@ int main(){
 
                 cout << "Decimal: " << resultado << endl;
             }
-            else cout << "Entrada invalida!" << endl;
             break;
         
         case 5:
@@ -76,8 +72,8 @@ int main(){
                 
                 cout << "Decimal: " << resultado << endl;
             }
-            else cout << "Entrada invalida!" << endl;
-        
+            break;
+
         case 6:
             cout << "Hexadecimal: ";
             cin >> entrada;
@@ -87,10 +83,12 @@ int main(){
 
                 double resultado = hexa_deci(inteira);
                 if (fracionaria != "") 
-                    resultado += octFrac_deci(fracionaria);
+                    resultado += hexaFrac_deci(fracionaria);
                 
-                cout << "Decimal: " << resultado << endl;
+               cout << "Decimal: " << resultado << endl; 
             }
+            break;
+
         default:
             cout << "Opção inexistente" << endl;
     }
