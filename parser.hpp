@@ -3,8 +3,8 @@
 
 #include <string>
 
-double stringDouble(string s);
-bool valida(string numero, int base);
-void separa(string numero, string &inteira, string &fracionaria);
+double stringDouble(std::string s);
+bool valida(std::string numero, int base);
+void separa(std::string numero, std::string &inteira, std::string &fracionaria);
 
 #endif

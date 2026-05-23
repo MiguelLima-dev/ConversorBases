@@ -48,6 +48,17 @@ int bin_deci(string binario) {
     return decimal;
 }
 
+// PARTE FRACIONÁRIA DO BINÁRIO P/ DECIMAL.
+double binFrac_deci(string fracao) {
+    double resultado = 0.0;
+    double peso = 1.0 / 2.0;
+    for (int i = 0; fracao[i] != '\0'; i++) {
+        resultado += (fracao[i] - '0') * peso;
+        peso /= 2.0;
+    }
+
+    return resultado;
+}
 // DECIMAL FRACIONÁRIO P/ OCTAL.
 string deci_oct(double decimal) {
 	string octal = "";
@@ -91,6 +102,18 @@ int oct_deci(string octal) {
     }
 
     return decimal;
+}
+
+// PARTE FRACIONÁRIA DO OCTAL P/ DECIMAL.
+double octFrac_deci(string fracao) {
+    double resultado = 0.0;
+    double peso = 1.0 / 8.0;
+    for (int i = 0; fracao[i] != '\0'; i++) {
+        resultado += (fracao[i] - '0') * peso;
+        peso /= 8.0;
+    }
+
+    return resultado;
 }
 
 // DECIMAL FRACIONÁRIO P/ HEXADECIMAL.
@@ -151,4 +174,15 @@ int hexa_deci(string hexadecimal) {
 	}
 
 	return decimal;
+}
+
+double hexaFrac_deci(string fracao) {
+    double resultado = 0.0;
+    double peso = 1.0 / 16.0;
+    for (int i = 0; fracao[i] != '\0'; i++) {
+        resultado += index(fracao[i]) * peso;
+        peso /= 16;
+    }
+
+    return resultado;
 }

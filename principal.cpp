@@ -58,11 +58,39 @@ int main(){
                 if (fracionaria != "")
                     resultado += binFrac_deci(fracionaria);
 
-                    cout << "Decimal: " << resultado << endl;
+                cout << "Decimal: " << resultado << endl;
             }
             else cout << "Entrada invalida!" << endl;
             break;
+        
+        case 5:
+            cout << "Octal: ";
+            cin >> entrada;
+            if (valida(entrada, 8)) {
+                string inteira, fracionaria;
+                separa(entrada, inteira, fracionaria);
 
+                double resultado = oct_deci(inteira);
+                if (fracionaria != "")
+                    resultado += octFrac_deci(fracionaria);
+                
+                cout << "Decimal: " << resultado << endl;
+            }
+            else cout << "Entrada invalida!" << endl;
+        
+        case 6:
+            cout << "Hexadecimal: ";
+            cin >> entrada;
+            if (valida(entrada, 16)) {
+                string inteira, fracionaria;
+                separa(entrada, inteira, fracionaria);
+
+                double resultado = hexa_deci(inteira);
+                if (fracionaria != "") 
+                    resultado += octFrac_deci(fracionaria);
+                
+                cout << "Decimal: " << resultado << endl;
+            }
         default:
             cout << "Opção inexistente" << endl;
     }
