@@ -18,6 +18,19 @@ double binFrac_deci(std::string fracao);
 double octFrac_deci(std::string fracao);
 double hexaFrac_deci(std::string fracao);
 
+// SEM PASSAR POR DECIMAL.
+char conversao(std::string blocoOCT);
+std::string bin_oct(std::string binario);
+std::string inversao(char caractere);
+std::string oct_bin(std::string octal);
+char conversaoH(std::string blocoHEX);
+std::string bin_hexa(std::string binario);
+std::string inversaoH(char caractere);
+std::string hexa_bin(std::string hexadecimal);
+std::string hexa_bin(string hexadecimal);
+std::string oct_hexa(std::string octal);
+std::string hexa_oct(string hexadecimal);
+
 // AUXILIAR	
 int index(char c);
 
