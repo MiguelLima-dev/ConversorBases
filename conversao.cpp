@@ -176,6 +176,7 @@ int hexa_deci(string hexadecimal) {
 	return decimal;
 }
 
+// CONVERTE A PARTE FRACIONÁRIA DO HEXADECIMAL P/ DECIMAL.
 double hexaFrac_deci(string fracao) {
     double resultado = 0.0;
     double peso = 1.0 / 16.0;

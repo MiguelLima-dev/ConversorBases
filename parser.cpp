@@ -27,6 +27,34 @@ double stringDouble(string s) {
 	return resultado;
 }
 
+// TRANSFORMA UM NÚMERO EM UM DOUBLE EM UMA STRING.
+string doubleString(double num) {
+	string numero = "";
+	int inteiro = (int)num;
+	double fracionario = num - inteiro;
+
+	if (inteiro == 0) numero = "0";
+
+	while (inteiro > 0) {
+		numero = char(inteiro % 10 + '0') + numero;
+		inteiro /= 10;
+	}
+
+	if (fracionario > 1e-12) {
+		numero += '.';
+		
+		int casas = 16;
+		while (fracionario > 1e-12 && casas-- > 0) {
+			fracionario *= 10;
+			int digito = (int)fracionario;
+			numero += char(digito + '0');
+			fracionario -= digito;
+		}
+
+	}
+	return numero;
+}
+
 // RETORNA SE O NÚMERO É VALIDO PARA A BASE INFORMADA.
 bool valida(string &numero, int base){
     if (numero == "") {

@@ -1,6 +1,7 @@
 #include <iostream>
 #include "conversao.hpp"
 #include "parser.hpp"
+#include "formatador.hpp"
 using namespace std;
 
 int main(){
@@ -21,8 +22,7 @@ int main(){
             cout << "Decimal: ";
             cin >> entrada;
             if (valida(entrada, 10)) {
-                cout << "Binário: " <<
-                deci_bin(stringDouble(entrada)) << endl;
+                imprimir(deci_bin(stringDouble(entrada)), 10, 2);
             }
             break;
 
@@ -30,8 +30,7 @@ int main(){
             cout << "Decimal ";
             cin >> entrada;
             if (valida(entrada, 10)) {
-                cout << "Octal: " <<
-                deci_oct(stringDouble(entrada)) << endl;
+                imprimir(deci_oct(stringDouble(entrada)), 10, 8);
             }
             break;
         
@@ -39,8 +38,7 @@ int main(){
             cout << "Decimal: ";
             cin >> entrada;
             if (valida(entrada, 10)) {
-                cout << "Hexadecimal: " <<
-                deci_hexa(stringDouble(entrada)) << endl;
+                imprimir(deci_hexa(stringDouble(entrada)), 10, 16);
             }
             break;
         
@@ -55,7 +53,7 @@ int main(){
                 if (fracionaria != "")
                     resultado += binFrac_deci(fracionaria);
 
-                cout << "Decimal: " << resultado << endl;
+                imprimir(doubleString(resultado), 2, 10);
             }
             break;
         
@@ -70,7 +68,7 @@ int main(){
                 if (fracionaria != "")
                     resultado += octFrac_deci(fracionaria);
                 
-                cout << "Decimal: " << resultado << endl;
+                imprimir(doubleString(resultado), 8, 10);
             }
             break;
 
@@ -85,7 +83,7 @@ int main(){
                 if (fracionaria != "") 
                     resultado += hexaFrac_deci(fracionaria);
                 
-               cout << "Decimal: " << resultado << endl; 
+                imprimir(doubleString(resultado), 8, 10);
             }
             break;
 
