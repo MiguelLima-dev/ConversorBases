@@ -149,8 +149,7 @@ string deci_hexa(double decimal) {
 	return hexadecimal;
 }
 
-// Usada para encontrar o valor de cada digitos da
-// base Hexadecimal.
+// Usada para encontrar o valor de cada digitos da base Hexadecimal.
 int index(char c) {
 	int indice = -1;
 	string digitos = "0123456789ABCDEF";
@@ -315,7 +314,6 @@ char conversaoH (string blocoHEX){
 		return 'F';
 	return '0';
 }
-
 string bin_hexa(string binario){
 	string hexadecimal = "";
 	
@@ -380,7 +378,6 @@ string inversaoH(char caractere){
 		return "1111";
 	return "";
 }
-
 string hexa_bin (string hexadecimal){
 	string binario = "";
 	
