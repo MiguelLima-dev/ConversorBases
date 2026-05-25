@@ -1,10 +1,10 @@
 #include "parser.hpp"
 #include <iostream>
 #include <string>
-using namespace std;
+
 
 // TRANFORMA UM NÚMERO EM UMA STRING EM UM DOUBLE.
-double stringDouble(string s) {
+double stringDouble(std::string s) {
 	double resultado = 0.0;	
 	double divisor = 10.0;
 	bool separador = false;
@@ -28,8 +28,8 @@ double stringDouble(string s) {
 }
 
 // TRANSFORMA UM NÚMERO EM UM DOUBLE EM UMA STRING.
-string doubleString(double num) {
-	string numero = "";
+std::string doubleString(double num) {
+	std::string numero = "";
 	int inteiro = (int)num;
 	double fracionario = num - inteiro;
 
@@ -56,12 +56,12 @@ string doubleString(double num) {
 }
 
 // RETORNA SE O NÚMERO É VALIDO PARA A BASE INFORMADA.
-bool valida(string &numero, int base){
+bool valida(std::string &numero, int base){
     if (numero == "") {
-        cout << "Nenhuma entrada encontrada!" << endl;
+        std::cout << "Nenhuma entrada encontrada!" << std::endl;
         return false;
     }
-	string validos = "0123456789ABCDEF";
+	std::string validos = "0123456789ABCDEF";
     int separador = 0;
 	for (int i = 0; numero[i] != '\0'; i++) {
 		char c = numero[i];
@@ -77,12 +77,12 @@ bool valida(string &numero, int base){
 				if (validos[j] == c) indx = j;
 			}
 			if (indx == -1 || indx >= base) {
-                cout << "Dígito '" << c << "' inválido para base " << base <<"!" << endl;
+                std::cout << "Dígito '" << c << "' inválido para base " << base <<"!" << std::endl;
                 return false;
             }
 		}
         if (separador > 1) {
-            cout << "Mais de um separador inserido!" << endl;
+            std::cout << "Mais de um separador inserido!" << std::endl;
             return false;
         }
 	}
@@ -91,7 +91,7 @@ bool valida(string &numero, int base){
 }
 
 // FUNÇÃO AUXILIAR PARA CONVERSÃO DE OUTRAS BASES PARA DECIMAL.
-void separa(string numero, string &inteira, string &fracionaria) {
+void separa(std::string numero, std::string &inteira, std::string &fracionaria) {
 	inteira = "";
 	fracionaria = "";
 	bool separador = false;
@@ -104,4 +104,11 @@ void separa(string numero, string &inteira, string &fracionaria) {
 		else
 			fracionaria += numero[i];
 	}
+}
+
+void input(std::string &input, bool &trace) {
+	std::cout << "Insira o valor a ser convertido: ";
+	std::cin >> input;
+	std::cout << "Deseja ver o trace da conversão? (1 para sim, 0 para não): ";
+	std::cin >> trace;
 }
