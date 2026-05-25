@@ -21,10 +21,11 @@ int main(){
     cout << "11. Converter Hexadecimal para Binário." << endl;
     cout << "12. Converter Hexadecimal para Octal." << endl;
     cout << "13. Modo Batch, lê de um arquivo.csv" << endl;
-
+    cout << "14. SAIR." << endl;
+    cout << "-|-|-INSIRA UMA ALTERNATIVA-|-|-" << endl;
+    
     int modo;
     cin >> modo;
-
     string entrada;
     bool trace;
     switch (modo) {
@@ -137,6 +138,7 @@ int main(){
             modoBatch();
             break;
 
+        case 14: break;
         default:    
             cout << "Opção inexistente" << endl;
 		}

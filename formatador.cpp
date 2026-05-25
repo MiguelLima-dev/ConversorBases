@@ -6,7 +6,7 @@
 using namespace std;
 
 void imprimir(string resultado, int baseOrigem, int baseDestino) {
-    cout << "Base " << baseOrigem << " -> Base " <<
+    cout << "\n Base " << baseOrigem << " -> Base " <<
         baseDestino << ": " << resultado << endl;
 }
 
