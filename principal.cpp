@@ -1,10 +1,21 @@
 #include <iostream>
+#include <fstream>
 #include "conversao.hpp"
 #include "parser.hpp"
 #include "formatador.hpp"
 using namespace std;
 
 int main(){
+	
+	cout << "=-=-=-=-= MODO DE ENTRADA E SAIDA =-=-=-=-=" << endl;
+    cout << "Digite (Manual) para entrada e saida padrão" << endl;
+    cout << "Digite (Batch) para entrada e saida por arquivo .csv" << endl;
+    
+    string modoEntrada;
+    cin >> modoEntrada;
+    
+    if(modoEntrada == "Manual"){
+	
     cout << "=-=-=-=-= MENU =-=-=-=-=" << endl;
     cout << "1. Converter Decimal para Binário." << endl;
     cout << "2. Converter Decimal para Octal." << endl;
@@ -143,7 +154,101 @@ int main(){
 			
         default:
             cout << "Opção inexistente" << endl;
-    }
+		}
+	}
+	
+	else if(modoEntrada == "Batch"){
+		
+		ifstream input;
+		input.open("entrada.csv");
+		
+		ofstream output;
+		output.open("saida.csv");
+	
+		if(input.is_open() && output.is_open()){
+			string valor;
+			string baseOriginal;
+			string novaBase;
+			
+			
+			while (getline(input, valor, ';')){
+				getline(input, baseOriginal, ';');
+				getline(input, novaBase);
+				
+				while(!novaBase.empty() && (novaBase.back() == '\r' || novaBase.back() == '\n')){
+					novaBase.pop_back();
+				}
+				
+				if(!valor.empty() && valor.front() == '\n'){
+					valor.erase(0, 1);
+				}
+				
+				string valorOriginal = valor;
+				string resultado  = "Conversão não incluida";
+				
+				string inteira = "", fracionaria = "";
+				
+				if(baseOriginal == "10" && novaBase == "2"){
+					resultado = deci_bin(stringDouble(valor));
+				}
+				else if(baseOriginal == "10" && novaBase == "8"){
+					resultado = deci_oct(stringDouble(valor));
+				}
+				else if(baseOriginal == "10" && novaBase == "16"){
+					resultado = deci_hexa(stringDouble(valor));
+				}
+				
+				else if(baseOriginal == "2" && novaBase == "10"){
+					separa(valor, inteira, fracionaria);
+					double result = bin_deci(inteira);
+					if (fracionaria != "") result += binFrac_deci(fracionaria);
+					resultado = doubleString(result);
+				}
+				else if(baseOriginal == "2" && novaBase == "8"){
+					resultado = bin_oct(valor);
+				}
+				else if(baseOriginal == "2" && novaBase == "16"){
+					resultado = bin_hexa(valor);
+				}
+				
+				else if(baseOriginal == "8" && novaBase == "10"){
+					separa(valor, inteira, fracionaria);
+					double result = oct_deci(inteira);
+					if(fracionaria != "") result += octFrac_deci(fracionaria);
+					resultado = doubleString(result);
+				}
+				else if (baseOriginal == "8" && novaBase == "2"){
+					resultado = oct_bin(valor);
+				}
+				else if (baseOriginal == "8" && novaBase == "16"){
+					resultado = oct_hexa(valor);
+				}
+				
+				else if(baseOriginal == "16" && novaBase == "10"){
+					separa(valor, inteira, fracionaria);
+					double result = hexa_deci(inteira);
+					if(fracionaria != "") result += hexaFrac_deci(fracionaria);
+					resultado = doubleString(result);
+				}
+				else if(baseOriginal == "16" && novaBase == "2"){
+					resultado = hexa_bin(valor);
+				}
+				else if (baseOriginal == "16" && novaBase == "8"){
+					resultado = hexa_oct(valor);
+				}
+				
+				
+				output << valorOriginal << ";" << baseOriginal << ";" << resultado << ";" << novaBase << endl;
+			}
+			input.close();
+			output.close();
+			cout << "Arquivo imprimido em saida.csv." << endl;
+	
+		}else{
+			cout << "Não foi possível abrir os arquivo entrada.csv e saida.csv." << endl;
+		}
+	
+	}
     
     return 0;
 }
