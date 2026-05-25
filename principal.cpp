@@ -139,13 +139,13 @@ int main(){
             modoBatch();
             break;
 
-        case 14: 
+        case 14: // CALCULADORA DE MÁXIMOS.
             int k;
             cout << "Insira o número de bits: ";
             calculaMaximos(k);
             break;
-            
-        case 15: break;
+
+        case 15: break; // SAI DO PROGRAMA.
 
         default:    
             cout << "Opção inexistente" << endl;
