@@ -21,7 +21,8 @@ int main(){
     cout << "11. Converter Hexadecimal para Binário." << endl;
     cout << "12. Converter Hexadecimal para Octal." << endl;
     cout << "13. Modo Batch, lê de um arquivo.csv" << endl;
-    cout << "14. SAIR." << endl;
+    cout << "14. Calculadora de máximos." << endl;
+    cout << "15. SAIR." << endl;
     cout << "-|-|-INSIRA UMA ALTERNATIVA-|-|-" << endl;
     
     int modo;
@@ -138,7 +139,14 @@ int main(){
             modoBatch();
             break;
 
-        case 14: break;
+        case 14: // CALCULADORA DE MÁXIMOS.
+            int k;
+            cout << "Insira o número de bits: ";
+            calculaMaximos(k);
+            break;
+
+        case 15: break; // SAI DO PROGRAMA.
+
         default:    
             cout << "Opção inexistente" << endl;
 		}
