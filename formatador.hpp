@@ -10,4 +10,7 @@ void imprimir(std::string resultado, int baseOrigem, int baseDestino);
 E IMPRIME EM OUTRO ARQUIVO.CSV DE SAIDA"*/
 void modoBatch();
 
+// CALCULA E IMPRIME OS MAIORES NÚMEROS EM CADA UMA DAS QUATRO BASES.
+void calculaMaximos(int k);
+
 #endif

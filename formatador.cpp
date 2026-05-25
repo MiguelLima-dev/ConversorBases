@@ -3,6 +3,7 @@
 #include "parser.hpp"
 #include <iostream>
 #include <fstream>
+#include <cmath>
 using namespace std;
 
 void imprimir(string resultado, int baseOrigem, int baseDestino) {
@@ -106,4 +107,17 @@ void modoBatch() {
 		cout << "Não foi possível abrir o arquivo entrada." << endl;
 	}
 	
+}
+
+void calculaMaximos(int k) {
+	int maiorBinario = pow(2, k) - 1;
+	int maiorDecimal = bin_deci(doubleString(maiorBinario), false);
+	int maiorOctal = stringDouble(bin_oct(doubleString(maiorBinario), false));
+	int maiorHexa = stringDouble(bin_hexa(doubleString(maiorBinario), false));
+
+	cout << "Maiores números representados com " << k << "bits nas bases:";
+	cout << "\nBinário :" << maiorBinario;
+	cout << "\nDecimal : " << maiorDecimal;
+	cout << "\nOctal : " << maiorOctal;
+	cout << "\nHexadecimal : " << maiorHexa << endl;
 }
