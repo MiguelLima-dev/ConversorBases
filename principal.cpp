@@ -142,6 +142,7 @@ int main(){
         case 14: // CALCULADORA DE MÁXIMOS.
             int k;
             cout << "Insira o número de bits: ";
+            cin >> k;
             calculaMaximos(k);
             break;
 
