@@ -6,7 +6,7 @@
 // IMPRIME O RESULTADO NO TERMINAL.
 void imprimir(std::string resultado, int baseOrigem, int baseDestino);
 
-/* EXECUTA O MODO BATCH, LÊ DE UM ARQUIVO.CSV DE ENTRAD
+/* EXECUTA O MODO BATCH, LÊ DE UM ARQUIVO.CSV DE ENTRADA
 E IMPRIME EM OUTRO ARQUIVO.CSV DE SAIDA"*/
 void modoBatch();
 
