@@ -106,6 +106,7 @@ void separa(std::string numero, std::string &inteira, std::string &fracionaria) 
 	}
 }
 
+// RECEBE O NÚMERO A SER CONVERTIDO E A OPÇÃO DE PASSO-A-PASSO.
 void input(std::string &input, bool &trace) {
 	std::cout << "Insira o valor a ser convertido: ";
 	std::cin >> input;
