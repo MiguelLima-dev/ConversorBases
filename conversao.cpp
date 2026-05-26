@@ -1,4 +1,5 @@
 #include "conversao.hpp"
+#include "parser.hpp"
 #include <iostream>
 #include <string>
 using namespace std;
@@ -363,48 +364,79 @@ string inversaoH(char caractere) {
 
 // BINÁRIO → OCTAL (agrupamento de 3 bits)
 string bin_oct(string binario, bool trace) {
-    string padded = binario;
-    int tam = binario.length();
-    if      (tam % 3 == 1) padded = "00" + binario;
-    else if (tam % 3 == 2) padded = "0"  + binario;
+    string inteira, fracionaria;
+    separa(binario, inteira, fracionaria);
+
+    int tam = inteira.length();
+    if      (tam % 3 == 1) inteira = "00" + binario;
+    else if (tam % 3 == 2) inteira = "0"  + binario;
 
     if (trace) {
         cout << "\n=== Binário → Octal ===" << endl;
-        cout << "Binário com padding: " << padded << endl;
+        cout << "Parte inteira com padding: " << inteira << endl;
         cout << "\n-- Agrupamento de 3 bits --" << endl;
     }
 
     string result = "";
-    for (int i = 0; i < (int)padded.length(); i += 3) {
-        string bloco = padded.substr(i, 3);
+    for (int i = 0; i < (int)inteira.length(); i += 3) {
+        string bloco = inteira.substr(i, 3);
         char digito = conversao(bloco);
         if (trace)
             cout << bloco << " → " << digito << endl;
         result += digito;
     }
 
+    // PARTE FRACIONARIA.
+    if (fracionaria != "") {
+        tam = fracionaria.length();
+        if (tam % 3 == 1) inteira += "0";
+        else if (tam % 3 == 2) inteira += "00";
+
+        if (trace) cout << "\n-- Agrupamento de 3 bits (parte fracionária) --" << endl;
+        
+        result += ".";
+        for (int i = 0; i < (int)fracionaria.length(); i += 3) {
+            string bloco = fracionaria.substr(i, 3);
+            char digito = conversao(bloco);
+            if (trace) cout << bloco << " → " << digito << endl;
+            result += digito;
+        }
+    }
     if (trace) cout << "Resultado: " << result << endl;
     return result;
 }
 
 // OCTAL → BINÁRIO (expansão de cada dígito em 3 bits)
 string oct_bin(string octal, bool trace) {
-    string binario = "";
+    string inteira, fracionaria;
+    separa(octal, inteira, fracionaria);
 
     if (trace) {
         cout << "\n=== Octal → Binário ===" << endl;
-        cout << "\n-- Expansão de cada dígito em 3 bits --" << endl;
+        cout << "\n-- Expansão de cada dígito em 3 bits (parte inteira) --" << endl;
     }
 
-    for (int i = 0; i < (int)octal.length(); i++) {
+    string result = "";
+    for (int i = 0; i < (int)inteira.length(); i++) {
         string bits = inversao(octal[i]);
         if (trace)
             cout << octal[i] << " → " << bits << endl;
-        binario += bits;
+        result += bits;
     }
 
-    if (trace) cout << "Resultado: " << binario << endl;
-    return binario;
+    if (fracionaria != "") {
+        if (trace) cout << "\n-- Expansão de cada digito em 3 bits (parte fracionária) --" << endl;
+        
+        result += ".";
+        for (int i = 0; i < (int)fracionaria.length(); i++) {
+            string bits = inversao(fracionaria[i]);
+            if (trace) cout << fracionaria[i] << " → " << bits << endl;
+            result += bits;
+        }
+    }
+
+    if (trace) cout << "Resultado: " << result << endl;
+    return result;
 }
 
 
