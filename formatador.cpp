@@ -237,7 +237,7 @@ while (quiz.pontuacao >= 0){
 			
 			//Interação com o usuário	
 			cout << endl;
-			cout << "=== QUIZ DAS CONVERSOES ===" << endl;
+			cout << "=== QUIZ DAS CONVERSOES === Digite ""sair"" para sair." << endl;
 			cout << "Nivel atual: " << quiz.nivelAtual << " Pontos:" << quiz.pontuacao << endl;
 			cout << "Converta o numero: " << sorteado << " da base " << origem << " para a base " << destino << endl;
 			cout << endl;
