@@ -13,4 +13,6 @@ void modoBatch();
 // CALCULA E IMPRIME OS MAIORES NÚMEROS EM CADA UMA DAS QUATRO BASES.
 void calculaMaximos(int k);
 
+// MODO QUIZ.
+void quizInterativo();
 #endif

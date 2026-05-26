@@ -22,7 +22,8 @@ int main(){
     cout << "12. Converter Hexadecimal para Octal." << endl;
     cout << "13. Modo Batch, lê de um arquivo.csv" << endl;
     cout << "14. Calculadora de máximos." << endl;
-    cout << "15. SAIR." << endl;
+    cout << "15. Modo quiz interativo." << endl;
+    cout << "16. SAIR." << endl;
     cout << "-|-|-INSIRA UMA ALTERNATIVA-|-|-" << endl;
     
     int modo;
@@ -146,7 +147,11 @@ int main(){
             calculaMaximos(k);
             break;
 
-        case 15: break; // SAI DO PROGRAMA.
+        case 15: // MODO QUIZ.
+            quizInterativo();
+            break;
+
+        case 16: break; // SAI DO PROGRAMA.
 
         default:    
             cout << "Opção inexistente" << endl;
