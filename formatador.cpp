@@ -112,10 +112,11 @@ void modoBatch() {
 }
 
 void calculaMaximos(int k) {
-	int maiorBinario = pow(2, k) - 1;
-	int maiorDecimal = bin_deci(doubleString(maiorBinario), false);
-	int maiorOctal = stringDouble(bin_oct(doubleString(maiorBinario), false));
-	int maiorHexa = stringDouble(bin_hexa(doubleString(maiorBinario), false));
+	int maiornum = pow(2, k) - 1;
+	string maiorBinario = deci_bin(maiornum, false);
+	string maiorDecimal = doubleString(maiornum);
+	string maiorOctal = bin_oct(maiorBinario, false);
+	string maiorHexa =bin_hexa(maiorBinario, false);
 
 	cout << "Maiores números representados com " << k << "bits nas bases:";
 	cout << "\nBinário :" << maiorBinario;
