@@ -2,6 +2,7 @@
 #include "parser.hpp"
 #include <iostream>
 #include <string>
+#include <cctype>
 using namespace std;
 
 // DECIMAL → BINÁRIO
@@ -11,8 +12,6 @@ string deci_bin(double decimal, bool trace) {
     double parte_fracionaria = decimal - parte_inteira;
 
     if (trace) cout << "\n=== Decimal → Binário ===" << endl;
-
-    // Parte inteira: divisões sucessivas
     if (trace) cout << "\n-- Parte inteira (divisões sucessivas) --" << endl;
 
     if (parte_inteira == 0) binario = "0";
@@ -28,7 +27,6 @@ string deci_bin(double decimal, bool trace) {
 
     if (trace) cout << "Lendo restos de baixo para cima: " << binario << endl;
 
-    // Parte fracionária: multiplicações sucessivas
     if (parte_fracionaria > 1e-12) {
         binario += '.';
         if (trace) cout << "\n-- Parte fracionária (multiplicações sucessivas) --" << endl;
@@ -46,7 +44,7 @@ string deci_bin(double decimal, bool trace) {
         }
         binario += frac;
 
-        if (casas <= 0 && parte_fracionaria > 1e-12) {
+        if (parte_fracionaria > 1e-12) {
             binario += "[...]";
             if (trace) cout << "(truncado em 16 casas)" << endl;
         }
@@ -95,7 +93,7 @@ string deci_oct(double decimal, bool trace) {
         }
         octal += frac;
 
-        if (casas <= 0 && parte_fracionaria > 1e-12) {
+        if (parte_fracionaria > 1e-12) {
             octal += "[...]";
             if (trace) cout << "(truncado em 16 casas)" << endl;
         }
@@ -145,7 +143,7 @@ string deci_hexa(double decimal, bool trace) {
         }
         hexadecimal += frac;
 
-        if (casas <= 0 && parte_fracionaria > 1e-12) {
+        if (parte_fracionaria > 1e-12) {
             hexadecimal += "[...]";
             if (trace) cout << "(truncado em 16 casas)" << endl;
         }
@@ -155,15 +153,14 @@ string deci_hexa(double decimal, bool trace) {
     return hexadecimal;
 }
 
-
 // AUXILIAR: índice do dígito hex
 int index(char c) {
     string digitos = "0123456789ABCDEF";
+    char maiusculo = toupper((unsigned char)c);
     for (int i = 0; i < 16; i++)
-        if (digitos[i] == c) return i;
+        if (digitos[i] == maiusculo) return i;
     return -1;
 }
-
 
 // BINÁRIO → DECIMAL
 int bin_deci(string binario, bool trace) {
@@ -342,34 +339,34 @@ char conversaoH(string blocoHEX) {
 }
 
 string inversaoH(char caractere) {
-    if (caractere == '0') return "0000";
-    if (caractere == '1') return "0001";
-    if (caractere == '2') return "0010";
-    if (caractere == '3') return "0011";
-    if (caractere == '4') return "0100";
-    if (caractere == '5') return "0101";
-    if (caractere == '6') return "0110";
-    if (caractere == '7') return "0111";
-    if (caractere == '8') return "1000";
-    if (caractere == '9') return "1001";
-    if (caractere == 'A' || caractere == 'a') return "1010";
-    if (caractere == 'B' || caractere == 'b') return "1011";
-    if (caractere == 'C' || caractere == 'c') return "1100";
-    if (caractere == 'D' || caractere == 'd') return "1101";
-    if (caractere == 'E' || caractere == 'e') return "1110";
-    if (caractere == 'F' || caractere == 'f') return "1111";
+    char c = toupper((unsigned char)caractere);
+    if (c == '0') return "0000";
+    if (c == '1') return "0001";
+    if (c == '2') return "0010";
+    if (c == '3') return "0011";
+    if (c == '4') return "0100";
+    if (c == '5') return "0101";
+    if (c == '6') return "0110";
+    if (c == '7') return "0111";
+    if (c == '8') return "1000";
+    if (c == '9') return "1001";
+    if (c == 'A') return "1010";
+    if (c == 'B') return "1011";
+    if (c == 'C') return "1100";
+    if (c == 'D') return "1101";
+    if (c == 'E') return "1110";
+    if (c == 'F') return "1111";
     return "";
 }
 
-
-// BINÁRIO → OCTAL (agrupamento de 3 bits)
+// BINÁRIO → OCTAL
 string bin_oct(string binario, bool trace) {
     string inteira, fracionaria;
     separa(binario, inteira, fracionaria);
 
     int tam = inteira.length();
-    if      (tam % 3 == 1) inteira = "00" + binario;
-    else if (tam % 3 == 2) inteira = "0"  + binario;
+    if      (tam % 3 == 1) inteira = "00" + inteira;
+    else if (tam % 3 == 2) inteira = "0"  + inteira;
 
     if (trace) {
         cout << "\n=== Binário → Octal ===" << endl;
@@ -386,11 +383,10 @@ string bin_oct(string binario, bool trace) {
         result += digito;
     }
 
-    // PARTE FRACIONARIA.
     if (fracionaria != "") {
         tam = fracionaria.length();
-        if (tam % 3 == 1) inteira += "0";
-        else if (tam % 3 == 2) inteira += "00";
+        if      (tam % 3 == 1) fracionaria += "00";
+        else if (tam % 3 == 2) fracionaria += "0";
 
         if (trace) cout << "\n-- Agrupamento de 3 bits (parte fracionária) --" << endl;
         
@@ -406,7 +402,7 @@ string bin_oct(string binario, bool trace) {
     return result;
 }
 
-// OCTAL → BINÁRIO (expansão de cada dígito em 3 bits)
+// OCTAL → BINÁRIO
 string oct_bin(string octal, bool trace) {
     string inteira, fracionaria;
     separa(octal, inteira, fracionaria);
@@ -418,9 +414,9 @@ string oct_bin(string octal, bool trace) {
 
     string result = "";
     for (int i = 0; i < (int)inteira.length(); i++) {
-        string bits = inversao(octal[i]);
+        string bits = inversao(inteira[i]);
         if (trace)
-            cout << octal[i] << " → " << bits << endl;
+            cout << inteira[i] << " → " << bits << endl;
         result += bits;
     }
 
@@ -439,74 +435,139 @@ string oct_bin(string octal, bool trace) {
     return result;
 }
 
-
-// BINÁRIO → HEXADECIMAL (agrupamento de 4 bits)
+// BINÁRIO → HEXADECIMAL
 string bin_hexa(string binario, bool trace) {
-    string padded = binario;
-    int tam = binario.length();
-    if      (tam % 4 == 1) padded = "000" + binario;
-    else if (tam % 4 == 2) padded = "00"  + binario;
-    else if (tam % 4 == 3) padded = "0"   + binario;
+    string inteira, fracionaria;
+    separa(binario, inteira, fracionaria);
+
+    int tam = inteira.length();
+    if      (tam % 4 == 1) inteira = "000" + inteira;
+    else if (tam % 4 == 2) inteira = "00"  + inteira;
+    else if (tam % 4 == 3) inteira = "0"   + inteira;
 
     if (trace) {
         cout << "\n=== Binário → Hexadecimal ===" << endl;
-        cout << "Binário com padding: " << padded << endl;
+        cout << "Parte inteira com padding: " << inteira << endl;
         cout << "\n-- Agrupamento de 4 bits --" << endl;
     }
 
     string result = "";
-    for (int i = 0; i < (int)padded.length(); i += 4) {
-        string bloco = padded.substr(i, 4);
+    for (int i = 0; i < (int)inteira.length(); i += 4) {
+        string bloco = inteira.substr(i, 4);
         char digito = conversaoH(bloco);
         if (trace)
             cout << bloco << " → " << digito << endl;
         result += digito;
     }
 
+    if (fracionaria != "") {
+        tam = fracionaria.length();
+        if      (tam % 4 == 1) fracionaria += "000";
+        else if (tam % 4 == 2) fracionaria += "00";
+        else if (tam % 4 == 3) fracionaria += "0";
+
+        if (trace) cout << "\n-- Agrupamento de 4 bits (parte fracionária) --" << endl;
+
+        result += ".";
+        for (int i = 0; i < (int)fracionaria.length(); i += 4) {
+            string bloco = fracionaria.substr(i, 4);
+            char digito = conversaoH(bloco);
+            if (trace) cout << bloco << " → " << digito << endl;
+            result += digito;
+        }
+    }
+
     if (trace) cout << "Resultado: " << result << endl;
     return result;
 }
 
-
-// HEXADECIMAL → BINÁRIO (expansão de cada dígito em 4 bits)
+// HEXADECIMAL → BINÁRIO
 string hexa_bin(string hexadecimal, bool trace) {
-    string binario = "";
+    string inteira, fracionaria;
+    separa(hexadecimal, inteira, fracionaria);
 
+    string binario_inteira = "";
     if (trace) {
         cout << "\n=== Hexadecimal → Binário ===" << endl;
-        cout << "\n-- Expansão de cada dígito em 4 bits --" << endl;
+        cout << "\n-- Expansão de cada dígito em 4 bits (parte inteira) --" << endl;
     }
 
-    for (int i = 0; i < (int)hexadecimal.length(); i++) {
-        string bits = inversaoH(hexadecimal[i]);
-        if (trace)
-            cout << hexadecimal[i] << " → " << bits << endl;
-        binario += bits;
+    for (int i = 0; i < (int)inteira.length(); i++) {
+        string bits = inversaoH(inteira[i]);
+        if (trace) cout << inteira[i] << " → " << bits << endl;
+        binario_inteira += bits;
     }
 
-    if (trace) cout << "Resultado: " << binario << endl;
-    return binario;
+    // AJUSTE DINÂMICO PARA COMPRIMENTO DE PALAVRA HEXA:
+    // Se a entrada hex contiver 2 caracteres como "10", gera 8 bits.
+    // Se a entrada contiver 1 caractere como "A", gera 4 bits originalmente.
+    // Os testes exigem que tanto "10" quanto "A.8" preencham múltiplos estritos de 8 bits na saída de hexa_bin.
+    int n_blocos = (inteira.length() + 1) / 2; 
+    int tam_esperado = n_blocos * 8;
+    while ((int)binario_inteira.length() < tam_esperado) {
+        binario_inteira = "0000" + binario_inteira;
+    }
+
+    string resultado_final = binario_inteira;
+
+    if (fracionaria != "") {
+        if (trace) cout << "\n-- Expansão de cada dígito em 4 bits (parte fracionária) --" << endl;
+        resultado_final += ".";
+        for (int i = 0; i < (int)fracionaria.length(); i++) {
+            string bits = inversaoH(fracionaria[i]);
+            if (trace) cout << fracionaria[i] << " → " << bits << endl;
+            resultado_final += bits;
+        }
+    }
+
+    if (trace) cout << "Resultado: " << resultado_final << endl;
+    return resultado_final;
+}
+
+// LÓGICA DE LIMPEZA GERAL DE ZEROS EXCEDENTES (Para saídas compostas inter-bases)
+string limpa_zeros(string str) {
+    string int_p, frac_p;
+    separa(str, int_p, frac_p);
+
+    // Limpa zeros à esquerda da parte inteira, mantendo ao menos um "0"
+    int i = 0;
+    while (i < (int)int_p.length() - 1 && int_p[i] == '0') {
+        i++;
+    }
+    int_p = int_p.substr(i);
+
+    // Limpa zeros à direita da parte fracionária
+    if (!frac_p.empty()) {
+        int j = frac_p.length() - 1;
+        while (j >= 0 && frac_p[j] == '0') {
+            j--;
+        }
+        if (j >= 0) {
+            frac_p = frac_p.substr(0, j + 1);
+            return int_p + "." + frac_p;
+        } else {
+            return int_p; // Virou inteiro puro
+        }
+    }
+    return int_p;
 }
 
 // OCTAL → HEXADECIMAL (via binário)
 string oct_hexa(string octal, bool trace) {
     if (trace) cout << "\n=== Octal → Hexadecimal (via Binário) ===" << endl;
     string binario = oct_bin(octal, trace);
-    return bin_hexa(binario, trace);
+    string hexadecimal = bin_hexa(binario, trace);
+    string resultado = limpa_zeros(hexadecimal);
+    if (trace) cout << "Resultado final limpo: " << resultado << endl;
+    return resultado;
 }
-
 
 // HEXADECIMAL → OCTAL (via binário)
 string hexa_oct(string hexadecimal, bool trace) {
     if (trace) cout << "\n=== Hexadecimal → Octal (via Binário) ===" << endl;
     string binario = hexa_bin(hexadecimal, trace);
     string octal = bin_oct(binario, trace);
-
-    // Remove zeros à esquerda
-    int i = 0;
-    while (i < (int)octal.length() - 1 && octal[i] == '0') i++;
-    octal = octal.substr(i);
-
-    if (trace) cout << "Resultado final (sem zeros à esquerda): " << octal << endl;
-    return octal;
+    string resultado = limpa_zeros(octal);
+    if (trace) cout << "Resultado final limpo: " << resultado << endl;
+    return resultado;
 }
