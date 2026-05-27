@@ -23,16 +23,17 @@ Todos os algoritmos de conversão foram implementados do zero, sem uso de funç�
 
 ```
 projeto/
-├── conversao.hpp       # declarações dos algoritmos de conversão
-├── conversao.cpp       # implementação dos algoritmos de conversão
-├── parser.hpp          # declarações do parser de entrada
-├── parser.cpp          # leitura, validação e parsing de entrada
-├── formatador.hpp      # declarações do formatador de saída
-├── formatador.cpp      # impressão, modo batch, quiz e calculadora
-├── principal.cpp       # ponto de entrada (main), menu CLI
+├── src/
+│   ├── conversao.hpp       # declarações dos algoritmos de conversão
+│   ├── conversao.cpp       # implementação dos algoritmos de conversão
+│   ├── parser.hpp          # declarações do parser de entrada
+│   ├── parser.cpp          # leitura, validação e parsing de entrada
+│   ├── formatador.hpp      # declarações do formatador de saída
+│   ├── formatador.cpp      # impressão, modo batch, quiz e calculadora
+│   └── principal.cpp       # ponto de entrada (main), menu CLI
 ├── tests/
-│   └── testes.cpp      # suíte de testes automatizados (30+ casos)
-├── entrada_exemplo.csv # exemplo de arquivo para o modo batch
+│   └── testes.cpp          # suíte de testes automatizados (30+ casos)
+├── entrada_exemplo.csv     # exemplo de arquivo para o modo batch
 └── README.md
 ```
 
@@ -43,7 +44,7 @@ projeto/
 Certifique-se de ter o `g++` instalado. Na raiz do projeto, execute:
 
 ```bash
-g++ -o conversor principal.cpp conversao.cpp parser.cpp formatador.cpp -lm
+g++ -o conversor src/principal.cpp src/conversao.cpp src/parser.cpp src/formatador.cpp -lm
 ```
 
 ## Execução
@@ -188,7 +189,7 @@ Arquivo imprimido em saida.csv.
 Para compilar e rodar a suíte de testes:
 
 ```bash
-g++ -o testes tests/testes.cpp conversao.cpp parser.cpp -lm
+g++ -o testes tests/testes.cpp src/conversao.cpp src/parser.cpp -lm
 ./testes
 ```
 
@@ -207,7 +208,7 @@ A saída mostra cada caso com `[OK]` ou `[FALHOU]` e um resumo final.
 
 ## Vídeo de Demonstração
 
-Colocar o link do video aqui.
+colocar o link do video
 
 ---
 
@@ -216,5 +217,5 @@ Colocar o link do video aqui.
 Para confirmar que nenhuma função vetada foi utilizada:
 
 ```bash
-grep -nE "\b(bin|oct|hex|parseInt|strtol|toBinaryString|bitset)\b" *.cpp *.hpp
+grep -nE "\b(bin|oct|hex|parseInt|strtol|toBinaryString|bitset)\b" src/*.cpp src/*.hpp
 ```
