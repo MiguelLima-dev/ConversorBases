@@ -19,8 +19,20 @@ Este projeto implementa um conversor universal entre os sistemas de numeração:
 
 O objetivo do trabalho é implementar manualmente os algoritmos de conversão entre bases, sem utilizar funções prontas da linguagem.
 
+## Estrutura
 ---
-
+projeto/
+├── conversao.hpp       # declarações dos algoritmos de conversão
+├── conversao.cpp       # implementação dos algoritmos de conversão
+├── parser.hpp          # declarações do parser de entrada
+├── parser.cpp          # leitura, validação e parsing de entrada
+├── formatador.hpp      # declarações do formatador de saída
+├── formatador.cpp      # impressão, modo batch, quiz e calculadora
+├── principal.cpp       # ponto de entrada (main), menu CLI
+├── tests/
+│   └── testes.cpp      # suíte de testes automatizados (30+ casos)
+├── entrada_exemplo.csv # exemplo de arquivo para o modo batch
+└── README.md
 # Funcionalidades
 
 ## F1 — Decimal → outras bases
