@@ -206,12 +206,6 @@ A saída mostra cada caso com `[OK]` ou `[FALHOU]` e um resumo final.
 
 ---
 
-## Vídeo de Demonstração
-
-https://drive.google.com/drive/folders/14Z6KNwrxNPCAI1h8Ef941350p0jNV_vu?hl=pt-br
-
----
-
 ## Verificação de Funções Proibidas
 
 Para confirmar que nenhuma função vetada foi utilizada:
